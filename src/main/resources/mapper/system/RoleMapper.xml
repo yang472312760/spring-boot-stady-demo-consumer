@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.yang.springboot.stady.demo.consumer.system.mapper.RoleMapper">
+
+    <!-- 通用查询映射结果 -->
+    <resultMap id="BaseResultMap" type="com.yang.springboot.stady.demo.consumer.system.model.Role">
+        <id column="id" property="id" />
+        <result column="role_name" property="roleName" />
+        <result column="sex" property="sex" />
+        <result column="is_delete" property="isDelete" />
+        <result column="create_time" property="createTime" />
+        <result column="order_by" property="orderBy" />
+        <result column="type" property="type" />
+    </resultMap>
+
+    <!-- 通用查询结果列 -->
+    <sql id="Base_Column_List">
+                s.id,
+                s.role_name,
+                s.sex,
+                s.is_delete,
+                s.create_time,
+                s.order_by,
+                s.type
+        </sql>
+
+    <select id="queryPage" resultMap="BaseResultMap">
+        select
+        <include refid="Base_Column_List" />
+        from sys_role s
+        <where>
+            1 = 1
+            <if test="et.roleName != null and ''!= et.roleName">
+                and s.role_name = #{et.roleName}
+            </if>
+            <if test="et.sex != null and ''!= et.sex">
+                and s.sex = #{et.sex}
+            </if>
+            <if test="et.isDelete != null and ''!= et.isDelete">
+                and s.is_delete = #{et.isDelete}
+            </if>
+            <if test="et.createTime != null and ''!= et.createTime">
+                and s.create_time = #{et.createTime}
+            </if>
+            <if test="et.orderBy != null and ''!= et.orderBy">
+                and s.order_by = #{et.orderBy}
+            </if>
+            <if test="et.type != null and ''!= et.type">
+                and s.type = #{et.type}
+            </if>
+        </where>
+    </select>
+
+</mapper>
